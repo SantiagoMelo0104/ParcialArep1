@@ -7,8 +7,12 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FacadeServer {
+    HttpConnection httpConnection;
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = null;
         try {
@@ -39,11 +43,13 @@ public class FacadeServer {
                     break;
                 }
             }
-//            URI uristr = null;
-//            uristr = inputLine;
-//            if(uristr.getPath().contains("/Consulta")){
-//
-//            }
+//            System.out.println("-------------------------------------------"+ inputLine);
+            //URL uristr = null;
+            //uristr =
+            //pedir path
+//            System.out.println("------------------------------------------- "+ uristr);
+
+
             outputLine = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type: text/html\r\n"
                     + "\r\n"

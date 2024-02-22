@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class HttpServer {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, URISyntaxException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(36000);
@@ -38,27 +42,61 @@ public class HttpServer {
                     break;
                 }
             }
+            //URI uristr = new URI(in.readLine().split(" ")[1]);
+//            URL pr=  new URL("http://localhost:35002/Consulta?comando=(1,2)");
+//            URI str = URI.create(" http://localhost:35002/Consulta?comando=(1,2)");
+//            //System.out.println("000000000000000000000000 " + uristr );
+//            System.out.println("000000000000000000000000 " + pr);
+//            URI yt = new URI(inputLine.split(" ")[1]);
+            String pru = "Consulta?comando=(1,2)";
+            URI tm = URI.create(pru);
 
-//            URL uriStr = null;
-//            uriStr =
-//            if(uriStr.getPath().contains("/consulta")){
-//                //String quer = uriStr.getPath().replace("")
-//
-//            }
+            System.out.println( " +++++++++ " + tm);
+            System.out.println( " +++++++++ " + tm.getPath());
 
-            outputLine = "HTTP/1.1 200 OK\r\n"
-                    + "Content-Type: text/html\r\n"
-                    + "\r\n"
-                    + "<!DOCTYPE html>\n"
-                    + "<html>\n"
-                    + "<head>\n"
-                    + "<meta charset=\"UTF-8\">\n"
-                    + "<title>Title of the document</title>\n"
-                    + "</head>\n"
-                    + "<body>\n"
-                    + "<h1>Mi propio mensaje</h1>\n"
-                    + "</body>\n"
-                    + "</html>\n";
+            if(tm.getPath().contains("Consulta")){
+                System.out.println("------------ " + tm);
+                String query = tm.getQuery().replace("comando=", "").replace("(", "").replace(")","");
+                String[] parametros = query.split(",");
+
+                Double parametro1 = Double.parseDouble(parametros[0]);
+                Double parametro2 = Double.parseDouble(parametros[1]);
+
+                Class c= Math.class;
+                Method m = c.getMethod("max", double.class, double.class);
+                Object res =m.invoke(null, parametro1, parametro2);
+
+                outputLine = "HTTP/1.1 200 OK\r\n"
+                        + "Content-Type: text/html\r\n"
+                        + "\r\n"
+                        + "<!DOCTYPE html>\n"
+                        + "<html>\n"
+                        + "<head>\n"
+                        + "<meta charset=\"UTF-8\">\n"
+                        + "<title>Title of the document</title>\n"
+                        + "</head>\n"
+                        + "<body>\n"
+                        + "<h1>Respuesta +" + res.toString() +"</h1>\n"
+                        + "</body>\n"
+                        + "</html>\n";
+
+
+            } else {
+                outputLine = "HTTP/1.1 200 OK\r\n"
+                        + "Content-Type: text/html\r\n"
+                        + "\r\n"
+                        + "<!DOCTYPE html>\n"
+                        + "<html>\n"
+                        + "<head>\n"
+                        + "<meta charset=\"UTF-8\">\n"
+                        + "<title>Title of the document</title>\n"
+                        + "</head>\n"
+                        + "<body>\n"
+                        + "<h1>Mi propio mensaje</h1>\n"
+                        + "</body>\n"
+                        + "</html>\n";
+            }
+
             out.println(outputLine);
             out.close();
             in.close();
