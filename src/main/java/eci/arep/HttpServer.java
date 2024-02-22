@@ -68,7 +68,7 @@ public class HttpServer {
                         + "<html>\n"
                         + "<head>\n"
                         + "<meta charset=\"UTF-8\">\n"
-                        + "<title>Title of the document</title>\n"
+                        + "<title>Calculo</title>\n"
                         + "</head>\n"
                         + "<body>\n"
                         + "<h1>Respuesta: " + res.toString() +"</h1>\n"
@@ -84,10 +84,10 @@ public class HttpServer {
                         + "<html>\n"
                         + "<head>\n"
                         + "<meta charset=\"UTF-8\">\n"
-                        + "<title>Title of the document</title>\n"
+                        + "<title>ERROR</title>\n"
                         + "</head>\n"
                         + "<body>\n"
-                        + "<h1>Mi propio mensaje</h1>\n"
+                        + "<h1>A MOMIR :( </h1>\n"
                         + "</body>\n"
                         + "</html>\n";
             }
