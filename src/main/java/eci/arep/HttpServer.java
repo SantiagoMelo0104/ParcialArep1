@@ -42,16 +42,11 @@ public class HttpServer {
                     break;
                 }
             }
-            //URI uristr = new URI(in.readLine().split(" ")[1]);
-//            URL pr=  new URL("http://localhost:35002/Consulta?comando=(1,2)");
-//            URI str = URI.create(" http://localhost:35002/Consulta?comando=(1,2)");
-//            //System.out.println("000000000000000000000000 " + uristr );
-//            System.out.println("000000000000000000000000 " + pr);
-//            URI yt = new URI(inputLine.split(" ")[1]);
-            String pru = "Consulta?comando=(1,2)";
+
+
+            String pru = "Consulta?comando=(9,10)";
             URI tm = URI.create(pru);
 
-            System.out.println( " +++++++++ " + tm);
             System.out.println( " +++++++++ " + tm.getPath());
 
             if(tm.getPath().contains("Consulta")){
@@ -76,7 +71,7 @@ public class HttpServer {
                         + "<title>Title of the document</title>\n"
                         + "</head>\n"
                         + "<body>\n"
-                        + "<h1>Respuesta +" + res.toString() +"</h1>\n"
+                        + "<h1>Respuesta: " + res.toString() +"</h1>\n"
                         + "</body>\n"
                         + "</html>\n";
 
